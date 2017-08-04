@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 import gof.com.databindingtalk.R;
@@ -16,13 +14,11 @@ import gof.com.databindingtalk.databinding.TalkItemBinding;
 import gof.com.databindingtalk.models.Talk;
 
 public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.TalkViewHolder> {
-    private final Context context;
     private List<Talk> talks;
     private OnItemClickListener listener;
 
-    public TalkAdapter(List<Talk> talks, Context context, OnItemClickListener listener) {
+    public TalkAdapter(List<Talk> talks, OnItemClickListener listener) {
         this.talks = talks;
-        this.context = context;
         this.listener = listener;
     }
 
@@ -39,7 +35,7 @@ public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.TalkViewHolder
     public void onBindViewHolder(TalkViewHolder holder, int position) {
         Talk currentTalk = talks.get(position);
         holder.getBinding().setModel(currentTalk);
-        Picasso.with(context).load(currentTalk.imageUrl).into(holder.getBinding().talkItemImage);
+        holder.getBinding().executePendingBindings();
     }
 
     @Override

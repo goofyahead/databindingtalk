@@ -51,7 +51,7 @@ public class TalkListActivity extends AppCompatActivity implements BaseView<List
     @Override
     public void onDataAvailable(List<Talk> data) {
         binding.listOfTalks.setLayoutManager(new LinearLayoutManager(this));
-        binding.listOfTalks.setAdapter(new TalkAdapter(data, this, this));
+        binding.listOfTalks.setAdapter(new TalkAdapter(data, this));
     }
 
     @Override
