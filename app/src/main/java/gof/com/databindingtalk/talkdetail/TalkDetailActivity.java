@@ -20,7 +20,6 @@ import gof.com.databindingtalk.talklist.presenter.TalkListPresenter;
 public class TalkDetailActivity extends AppCompatActivity implements BaseView<Talk> {
     public static final String EXTRA_TALK_ID = "EXTRA_TALK_ID";
     private TalkDetailPresenter presenter;
-    private AppNavigation navigator;
     private ImageView talkImage;
     private TextView talkTitle;
     private TextView talkRating;
@@ -30,7 +29,6 @@ public class TalkDetailActivity extends AppCompatActivity implements BaseView<Ta
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_talk_detail);
         presenter = new TalkDetailPresenter();
-        navigator = new GlobalNavigator();
         initViews();
     }
 
