@@ -23,6 +23,7 @@ public class TalkDetailActivity extends AppCompatActivity implements BaseView<Ta
     private ImageView talkImage;
     private TextView talkTitle;
     private TextView talkRating;
+    private String talkTitleArgument;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +42,9 @@ public class TalkDetailActivity extends AppCompatActivity implements BaseView<Ta
     @Override
     protected void onResume() {
         super.onResume();
-        String talkId = getIntent().getStringExtra(EXTRA_TALK_ID);
+        talkTitleArgument = getIntent().getStringExtra(EXTRA_TALK_ID);
         presenter.setView(this);
-        presenter.getTalk(talkId);
+        presenter.getTalk(talkTitleArgument);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class TalkDetailActivity extends AppCompatActivity implements BaseView<Ta
     @Override
     public void onDataAvailable(Talk talk) {
         Picasso.with(this).load(talk.imageUrl).into(talkImage);
-        talkTitle.setText(talk.title);
+        talkTitle.setText(talkTitleArgument);
         talkRating.setText(String.format(Locale.getDefault(), "%d", talk.rating.get()));
     }
 
