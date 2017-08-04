@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DataBindingTalk</string>
+    <string name="rating">Rating:</string>
 </resources>
