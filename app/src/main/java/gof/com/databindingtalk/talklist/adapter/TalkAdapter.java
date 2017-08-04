@@ -1,19 +1,18 @@
 package gof.com.databindingtalk.talklist.adapter;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.Locale;
 
 import gof.com.databindingtalk.R;
+import gof.com.databindingtalk.databinding.TalkItemBinding;
 import gof.com.databindingtalk.models.Talk;
 
 public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.TalkViewHolder> {
@@ -33,18 +32,14 @@ public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.TalkViewHolder
 
     @Override
     public TalkViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View contactView = LayoutInflater.from(parent.getContext()).inflate(R.layout.talk_item, parent, false);
-        return new TalkViewHolder(contactView);
+        return new TalkViewHolder((TalkItemBinding) DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.talk_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(TalkViewHolder holder, int position) {
-        // Get the data model based on position
         Talk currentTalk = talks.get(position);
-        // Set item views based on your views and data model
-        holder.title.setText(currentTalk.title);
-        holder.rating.setText(String.format(Locale.getDefault(), "%d", currentTalk.rating));
-        Picasso.with(context).load(currentTalk.imageUrl).into(holder.image);
+        holder.getBinding().setModel(currentTalk);
+        Picasso.with(context).load(currentTalk.imageUrl).into(holder.getBinding().talkItemImage);
     }
 
     @Override
@@ -53,26 +48,26 @@ public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.TalkViewHolder
     }
 
     class TalkViewHolder extends RecyclerView.ViewHolder {
-        private ImageView image;
-        private TextView title;
-        private TextView rating;
+        private TalkItemBinding binding;
 
-        public TalkViewHolder(final View itemView) {
-            super(itemView);
-            image = (ImageView) itemView.findViewById(R.id.talk_item_image);
-            title = (TextView) itemView.findViewById(R.id.talk_title);
-            rating = (TextView) itemView.findViewById(R.id.talk_rating);
-            itemView.setOnClickListener(new View.OnClickListener() {
+        public TalkViewHolder(final TalkItemBinding itemView) {
+            super(itemView.getRoot());
+            this.binding = itemView;
+            itemView.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(itemView, talks.get(position));
+                            listener.onItemClick(itemView.getRoot(), talks.get(position));
                         }
                     }
                 }
             });
+        }
+
+        TalkItemBinding getBinding() {
+            return binding;
         }
     }
 }
