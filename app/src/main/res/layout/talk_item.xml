@@ -65,7 +65,9 @@
                         android:id="@+id/talk_rating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_rectangle_background"
                         android:text="@{Integer.toString(model.rating)}"
+                        app:blinkOnChange="@{model.rating}"
                         tools:text="4.3 stars"/>
 
                 </LinearLayout>

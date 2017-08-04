@@ -56,7 +56,7 @@ public class TalkDetailActivity extends AppCompatActivity implements BaseView<Ta
     public void onDataAvailable(Talk talk) {
         Picasso.with(this).load(talk.imageUrl).into(talkImage);
         talkTitle.setText(talk.title);
-        talkRating.setText(String.format(Locale.getDefault(), "%d", talk.rating));
+        talkRating.setText(String.format(Locale.getDefault(), "%d", talk.rating.get()));
     }
 
     @Override
