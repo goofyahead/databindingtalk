@@ -20,7 +20,7 @@ import gof.com.databindingtalk.models.Talk;
 import gof.com.databindingtalk.talklist.adapter.TalkAdapter;
 import gof.com.databindingtalk.talklist.presenter.TalkListPresenter;
 
-public class TalkListActivity extends AppCompatActivity implements BaseView<List<Talk>>, TalkAdapter.OnItemClickListener {
+public class TalkListActivity extends AppCompatActivity implements BaseView<List<Talk>> {
     private static final String TAG = TalkListActivity.class.getSimpleName();
     private TalkListPresenter presenter;
     private AppNavigation navigator;
@@ -39,7 +39,8 @@ public class TalkListActivity extends AppCompatActivity implements BaseView<List
         super.onResume();
         presenter.setView(this);
         presenter.getTalks();
-        Picasso.with(this).load("https://pbs.twimg.com/profile_images/2948345673/ce64b79c6d157dea1c3f0949f7f98c72.jpeg").into(binding.headerImage);
+        Picasso.with(this).load("https://pbs.twimg.com/profile_images/2948345673/ce64b79c6d157dea1c3f0949f7f98c72.jpeg")
+                .into(binding.headerImage);
     }
 
     @Override
@@ -51,16 +52,11 @@ public class TalkListActivity extends AppCompatActivity implements BaseView<List
     @Override
     public void onDataAvailable(List<Talk> data) {
         binding.listOfTalks.setLayoutManager(new LinearLayoutManager(this));
-        binding.listOfTalks.setAdapter(new TalkAdapter(data, this));
+        binding.listOfTalks.setAdapter(new TalkAdapter(data, navigator));
     }
 
     @Override
     public void onDataError(Exception error) {
         Log.e(TAG, "error found " + error.getLocalizedMessage());
-    }
-
-    @Override
-    public void onItemClick(View itemView, Talk talk) {
-        navigator.navigateToTalkDetail(this, talk.id);
     }
 }

@@ -1,7 +1,7 @@
 package gof.com.databindingtalk.base;
 
-import android.app.Activity;
+import android.content.Context;
 
 public interface AppNavigation {
-    void navigateToTalkDetail(Activity activity, String talkId);
+    void navigateToTalkDetail(Context context, String talkId);
 }

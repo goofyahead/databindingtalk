@@ -10,20 +10,17 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import gof.com.databindingtalk.R;
+import gof.com.databindingtalk.base.AppNavigation;
 import gof.com.databindingtalk.databinding.TalkItemBinding;
 import gof.com.databindingtalk.models.Talk;
 
 public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.TalkViewHolder> {
+    private final AppNavigation appNavigation;
     private List<Talk> talks;
-    private OnItemClickListener listener;
 
-    public TalkAdapter(List<Talk> talks, OnItemClickListener listener) {
+    public TalkAdapter(List<Talk> talks, AppNavigation appNavigation) {
         this.talks = talks;
-        this.listener = listener;
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(View itemView, Talk talk);
+        this.appNavigation = appNavigation;
     }
 
     @Override
@@ -35,6 +32,7 @@ public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.TalkViewHolder
     public void onBindViewHolder(TalkViewHolder holder, int position) {
         Talk currentTalk = talks.get(position);
         holder.getBinding().setModel(currentTalk);
+        holder.getBinding().setNavigation(appNavigation);
         holder.getBinding().executePendingBindings();
     }
 
@@ -49,17 +47,6 @@ public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.TalkViewHolder
         public TalkViewHolder(final TalkItemBinding itemView) {
             super(itemView.getRoot());
             this.binding = itemView;
-            itemView.getRoot().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(itemView.getRoot(), talks.get(position));
-                        }
-                    }
-                }
-            });
         }
 
         TalkItemBinding getBinding() {

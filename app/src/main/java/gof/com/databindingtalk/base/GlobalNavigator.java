@@ -1,17 +1,15 @@
 package gof.com.databindingtalk.base;
 
-import android.app.Activity;
-import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 
 import gof.com.databindingtalk.talkdetail.TalkDetailActivity;
 
-public class GlobalNavigator implements AppNavigation{
-
+public class GlobalNavigator implements AppNavigation {
     @Override
-    public void navigateToTalkDetail(Activity activity, String talkId) {
-        Intent talkDetailIntent = new Intent(activity, TalkDetailActivity.class);
+    public void navigateToTalkDetail(Context context, String talkId) {
+        Intent talkDetailIntent = new Intent(context, TalkDetailActivity.class);
         talkDetailIntent.putExtra(TalkDetailActivity.EXTRA_TALK_ID, talkId);
-        activity.startActivity(talkDetailIntent);
+        context.startActivity(talkDetailIntent);
     }
 }
