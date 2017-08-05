@@ -14,21 +14,17 @@ import gof.com.databindingtalk.R;
 public class TalkBindingAdapters {
     @BindingAdapter("loadImageFromUrl")
     public static void loadImageFromUrl(ImageView imageView, String url) {
-        if (imageView != null) {
-            Picasso.with(imageView.getContext()).load(url).into(imageView);
-        }
+        Picasso.with(imageView.getContext()).load(url).into(imageView);
     }
 
     @BindingAdapter({"placeHolder", "loadImageFromUrl"})
     public static void loadImageFromUrlWithPlaceHolder(ImageView imageView, Drawable placeHolder, String url) {
-        if (imageView != null) {
-            Picasso.with(imageView.getContext()).load(url).placeholder(placeHolder).into(imageView);
-        }
+        Picasso.with(imageView.getContext()).load(url).placeholder(placeHolder).into(imageView);
     }
 
     @BindingAdapter("app:blinkOnChange")
     public static void blinkOnChange(TextView textView, int oldContent, int newContent) {
-        if (oldContent != 0 && textView != null && oldContent != newContent) {
+        if (oldContent != 0 && oldContent != newContent) {
             int colorFrom = ContextCompat.getColor(textView.getContext(), R.color.transparent);
             int colorTo = ContextCompat.getColor(textView.getContext(), R.color.colorAccent);
             int textColorFrom = ContextCompat.getColor(textView.getContext(), R.color.black);
