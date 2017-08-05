@@ -3,8 +3,10 @@ Sample of data binding usage for gdg talk in Dubai
 
 Meetup:
 https://www.meetup.com/GDG-Dubai/events/242139793/
+
 Slides:
 https://drive.google.com/open?id=0BzOY3QAbReXTejFnRFd3R2tYOVE
+
 ScreenVideo:
 https://youtu.be/aJTGT-fvTl4
 
